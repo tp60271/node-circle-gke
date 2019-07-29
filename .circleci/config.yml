@@ -26,10 +26,10 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      - PROJECT_NAME: "my-app"
-      - GOOGLE_PROJECT_ID: "xxxx"
-      - GOOGLE_COMPUTE_ZONE: "europe-west3-a"
-      - GOOGLE_CLUSTER_NAME: "cluster-1"
+      - PROJECT_NAME: "DevOps"
+      - GOOGLE_PROJECT_ID: "devops-234402"
+      - GOOGLE_COMPUTE_ZONE: "asia-southeast1-b"
+      - GOOGLE_CLUSTER_NAME: "gke-cluster"
     steps:
       - checkout
       - run: 
@@ -49,9 +49,9 @@ jobs:
               --build-arg COMMIT_REF=${CIRCLE_SHA1} \
               --build-arg BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”` \
               -t ${PROJECT_NAME} .
-            docker tag ${PROJECT_NAME} eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
-            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://eu.gcr.io
-            docker push eu.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+            docker tag ${PROJECT_NAME} asia.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
+            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://asia.gcr.io
+            docker push asia.gcr.io/${GOOGLE_PROJECT_ID}/${PROJECT_NAME}:${CIRCLE_SHA1}
       - run: 
           name: Deploy to Kubernetes
           command: |
