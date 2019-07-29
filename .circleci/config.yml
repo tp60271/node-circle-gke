@@ -26,7 +26,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      - PROJECT_NAME: "DevOps"
+      - PROJECT_NAME: "devops"
       - GOOGLE_PROJECT_ID: "devops-234402"
       - GOOGLE_COMPUTE_ZONE: "asia-southeast1-b"
       - GOOGLE_CLUSTER_NAME: "gke-cluster"
